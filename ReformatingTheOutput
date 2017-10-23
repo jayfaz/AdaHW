@@ -92,27 +92,24 @@ procedure Adahw is
          end if;
    end CalcProb;
 
-   function Output return String is
-      --Outputs
-   begin
-   Put("P(D | Pos1) = ");
-   Put(test1pp, Exp => 0, Aft =>2); Put_Line("");
-   Put("P(D | Pos2) = ");
-   Put(test2pp, Exp => 0, Aft =>2); Put_Line("");
-   Put("P(D | Neg1) = ");
-   Put(test1np, Exp => 0, Aft =>2); Put_Line("");
-   Put("P(D | Neg2) = ");
-   Put(test2np, Exp => 0, Aft =>2); Put_Line("");
-   
-   if test1pp > test2pp AND test1np > test2np then
-		Put("Test 1 is better);
-   if test2pp > test1pp AND test2np > test1np then
-		Put("Test 2 is better);
-   else
-		Put("Neither Test is Better");
-   end if;
-   end Output;
 
+begin
+Put("P(D | Pos1) = ");
+Put(test1pp, Exp => 0, Aft =>2); Put_Line("");
+Put("P(D | Pos2) = ");
+Put(test2pp, Exp => 0, Aft =>2); Put_Line("");
+Put("P(D | Neg1) = ");
+Put(test1np, Exp => 0, Aft =>2); Put_Line("");
+Put("P(D | Neg2) = ");
+Put(test2np, Exp => 0, Aft =>2); Put_Line("");
+ 
+if test1pp > test2pp AND test1np > test2np then
+	Put("Test 1 is better);
+elsif test2pp > test1pp AND test2np > test1np then
+	Put("Test 2 is better);
+else
+	Put("Neither Test is Better");
+end if;
 
 begin
    Get(numberofpatients);
