@@ -97,22 +97,24 @@ procedure Adahw is
       --Outputs
    begin
    if test1pp > test2pp and test1np > test2np then
-         return "P(D | Pos1) = " & Float'Image(test1pp) & cr & " P(D | Pos2) = " &
-           Float'Image(test2pp) & cr & " P(H | Neg1) = " & Float'Image(test1np) &
-           cr & " P(H | Neg2) = " & Float'Image(test2np) & cr & " Test 1 is better.";
+         return "P(D | Pos1) = " & Float'Image(test1pp) & " P(D | Pos2) = " &
+           Float'Image(test2pp) & " P(H | Neg1) = " & Float'Image(test1np) &
+           " P(H | Neg2) = " & Float'Image(test2np) & " Test 1 is better.";
    elsif test1pp < test2pp and test1np < test2np then
-         return "P(D | Pos1) = " & Float'Image(test1pp) & cr & " P(D | Pos2) = " &
-           Float'Image(test2pp) & cr & " P(H | Neg1) = " & Float'Image(test1np) &
-           cr & " P(H | Neg2) = " & Float'Image(test2np) & cr & " Test 2 is better.";
+         return "P(D | Pos1) = " & Float'Image(test1pp) & " P(D | Pos2) = " &
+           Float'Image(test2pp) & " P(H | Neg1) = " & Float'Image(test1np) &
+           " P(H | Neg2) = " & Float'Image(test2np) & " Test 2 is better.";
    else
-         return "P(D | Pos1) = " & Float'Image(test1pp) & cr & " P(D | Pos2) = " &
-           Float'Image(test2pp) & cr & " P(H | Neg1) = " & Float'Image(test1np) &
-           cr & " P(H | Neg2) = " & Float'Image(test2np) & cr & " Neither test is better.";
+         return "P(D | Pos1) = " & Float'Image(test1pp) & " P(D | Pos2) = " &
+           Float'Image(test2pp) & " P(H | Neg1) = " & Float'Image(test1np) &
+           " P(H | Neg2) = " & Float'Image(test2np) & " Neither test is better.";
    end if;
    end Output;
 
 
 begin
+   Put("Start input");
+   New_Line(1);
    Get(numberofpatients);
    declare
       records : patientrecords (1..numberofpatients, 1..4);
