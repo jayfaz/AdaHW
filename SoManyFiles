@@ -1,0 +1,130 @@
+
+-------------------------------------------------------------------------
+with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+use Ada.Integer_Text_IO;
+with Ada.Float_Text_IO; use Ada.Float_Text_IO;
+procedure Adahw is
+   pos1total, neg1total, pos1sick, neg1health, pos2total, neg2total, pos2sick, neg2health: Integer := 0;
+   type patientRecords is array (Positive range <>, Positive range <>) of Integer;
+   i, numberofpatients: Integer;
+   test1pp, test1np, test2pp, test2np: Float;
+   results : String(1..150);
+   cr : Character := ASCII.CR;
+   function GetInput (records: in out patientRecords) return patientRecords is
+      --For loop to get patient data input and insert into an array.
+   begin
+      i := 1;
+      while i <= numberofpatients loop
+         Ada.Integer_Text_IO.Get(records(i, 1));
+         Ada.Integer_Text_IO.Get(records(i, 2));
+         Ada.Integer_Text_IO.Get(records(i, 3));
+         Ada.Integer_Text_IO.Get(records(i, 4));
+         Put(records(i, 1));
+         Put(records(i, 2));
+         New_Line(1);
+         i := i + 1;
+      end loop;
+      return records;
+   end GetInput;
+
+   procedure CalcTotals (records: in patientRecords) is
+      --Calculate total positive and negative tests for sick and health
+      begin
+      for i of records loop
+         Put(i,1);
+         --Put(I,2);
+         --Put(I,3);
+         --Put(I,4);
+      if records(i, 3) = 1 then
+         --Increase Positive test totals
+         pos1total := pos1total + 1;
+         if records(i, 2) = 1 then
+            --Increase Positive Test 1
+            pos1sick := pos1sick + 1;
+         end if;
+      else
+         --Increase Negative test totals
+         if records(i, 2) = 0 then
+            --Increase Neagtive Test 1
+           neg1health := neg1health + 1;
+         end if;
+      end if;
+      if records(i, 4) = 1 then
+         --Increase Positive test totals
+         pos2total := pos2total + 1;
+         if records(i, 2) = 1 then
+            --Increase Positive Test 1
+            pos2sick := pos2sick + 1;
+         end if;
+      else
+         --Increase Negative test totals
+         if records(i, 2) = 0 then
+            --Increase Neagtive Test 1
+           neg2health := neg2health + 1;
+         end if;
+      end if;
+     end loop;
+   end CalcTotals;
+
+   procedure CalcProb is
+      --Function to calculate and output probabilities.
+   begin
+      if pos1total = 0 then
+        test1pp := Float(pos1sick);
+      else
+         test1pp := Float(pos1sick/pos1total);
+      end if;
+      if neg1total = 0 then
+        test1np := Float(neg1health);
+      else
+         test1np := Float(neg1health/neg1total);
+         end if;
+      if pos2total = 0 then
+        test2pp := Float(pos2sick);
+      else
+         test2pp := Float(pos2sick/pos2total);
+         end if;
+      if neg2total = 0 then
+        test2np := Float(neg2health);
+      else
+         test2np := Float(neg2health/neg2total);
+         end if;
+   end CalcProb;
+
+
+begin
+ 
+if test1pp > test2pp AND test1np > test2np then
+	Put("Test 1 is better");
+elsif test2pp > test1pp AND test2np > test1np then
+	Put("Test 2 is better");
+else
+	Put("Neither Test is Better");
+end if;
+
+
+   Get(numberofpatients);
+   declare
+      records : patientrecords (1..numberofpatients, 1..4);
+      begin
+      CalcTotals(GetInput(records));
+      CalcProb;
+      Put("P(D | Pos1) = ");
+	  Put(test1pp, Exp => 0, Aft =>2); Put_Line("");
+	  Put("P(D | Pos2) = ");
+	  Put(test2pp, Exp => 0, Aft =>2); Put_Line("");
+      Put("P(D | Neg1) = ");
+      Put(test1np, Exp => 0, Aft =>2); Put_Line("");
+      Put("P(D | Neg2) = ");
+      Put(test2np, Exp => 0, Aft =>2); Put_Line("");
+	  
+      if test1pp > test2pp AND test1np > test2np then
+		  Put("Test 1 is better);
+	  elsif test2pp > test1pp AND test2np > test1np then
+		  Put("Test 2 is better);
+	  else
+		  Put("Neither Test is Better");
+	  end if;
+   end;
+end Adahw;
